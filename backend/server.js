@@ -1,4 +1,4 @@
-// const colors = require('colors')
+const colors = require('colors')
 const express = require('express')
 const dotenv = require('dotenv').config()
 const path = require('path')
