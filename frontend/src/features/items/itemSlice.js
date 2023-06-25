@@ -70,7 +70,7 @@ export const itemSlice = createSlice({
             .addCase(createItem.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.goals.push(action.payload)
+                state.items.push(action.payload)
             })
             .addCase(createItem.rejected, (state, action) => {
                 state.isLoading = false

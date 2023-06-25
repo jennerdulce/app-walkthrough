@@ -12,9 +12,9 @@ const initialState = {
 }
 
 // Register User
-export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
+export const register = createAsyncThunk('auth/register', async (userData, thunkAPI) => {
     try {
-        return await authService.registerUser(user)
+        return await authService.registerUser(userData)
     } catch (error) {
         const message = ((error.response && error.response.data && error.response.data.message) || error.message || error.toString())
         return thunkAPI.rejectWithValue(message)
@@ -22,9 +22,9 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
 })
 
 // Login User
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) => {
     try {
-        return await authService.login(user)
+        return await authService.login(userData)
     } catch (error) {
         const message = ((error.response && error.response.data && error.response.data.message) || error.message || error.toString())
         return thunkAPI.rejectWithValue(message)

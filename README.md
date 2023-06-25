@@ -126,6 +126,38 @@ MONGODB_URI = mongodb+srv://jennerdulce:jennerdulce@merntutorialcluster.fgesawn.
 - Be sure to add the database name in this area `merntutorialcluster.fgesawn.mongodb.net/--here--?`
 - Refer to `MongoDB Walkthrough` folder
 
+####  Creating a Database on Atlas
+- Step 1: Create a project
+- Step 2: Click Create Project
+- Step 3: Click Build a Database
+- Step 4: Select all of the settings
+- Step 5: Select all of the settings
+  - I name my username and password the same so that it is easy to remember
+- Step 6: Click Add IP Address
+- Step 7: Click `Allow Access From Anywhere`
+- Step 8: Click `Collections` and Click `Add My Own Data`
+- Step 9 & 10: Create your `collections`
+- Step 11: Should look like this
+
+#### Connect to Application
+- Connect: Click connect
+- Step 1: Click Drivers
+- Step 2: Copy the connection string
+- Step 3: Paste it into your `.env` file at the root of your app
+- Step 4: Replace the password and add the database that is from your cluster
+- Step 5: See the `db.js` file in your `config` folder
+- Step 6: See lines 15-17 in your `server.js` file
+
+#### Connect to Compass
+- Connect: Click connect
+- Step 1: Click Compass
+- Step 2: Copy the connection string
+- Step 3: Open Compass and click New Connection
+- Step 4 & 5: Paste the connection string here and add the password and the database name
+- Step 5: You should see your database and collections you've previous created on Atlas
+- Step 6: You should see your database and collections you've previous created on Atlas
+
+
 #### Config Folder
 - Create a file called `db.js` within the `config` folder
 - See boilerplate code in `db.js`
@@ -265,6 +297,9 @@ export default App;
 - Components are block of code that are reusable for different pages
 - Typically you'd import components into a page to be used
 - Refer to `components` folder for basic components you can potentially use
+
+## Finialize Frontend
+- While in the `frontend` directory, run the script `npm run build` in your terminal
 
 ## Deploy to Render
 - Refer to `Render Images` folder

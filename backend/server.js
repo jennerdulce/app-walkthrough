@@ -16,13 +16,18 @@ const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 connectDB()
 
-// Routes
-app.use('/api/items', itemRoutes)
-app.use('/api/users', userRoutes)
-
-// Allows req.body to be used
+// ** Important that this goes before routes **
+// Allows req.body to be used 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+// Routes
+app.get('/hello', (req, res) => {
+  res.status(200).json({message: 'Hello World'})
+})
+
+app.use('/api/items', itemRoutes)
+app.use('/api/users', userRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
