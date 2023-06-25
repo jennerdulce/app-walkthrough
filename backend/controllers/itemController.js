@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler')
 
 // ** FOR DATABASE **
-const Goal = require('../models/goalModel')
+const Item = require('../models/itemModel')
 
 // @desc Get all items
 // @route GET /api/getAllItems

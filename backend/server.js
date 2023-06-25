@@ -4,6 +4,11 @@ const dotenv = require('dotenv').config()
 const path = require('path')
 const port = process.env.PORT || 3001
 const app = express()
+
+// Imported Routes
+const itemRoutes = require('./routes/itemRoutes')
+const userRoutes = require('./routes/userRoutes')
+
 const { errorHandler } = require('./middleware/errorMiddleware')
 
 
@@ -12,7 +17,8 @@ const connectDB = require('./config/db')
 connectDB()
 
 // Routes
-const someRoutes = require('./routes/goalRoutes')
+app.use('/api/items', itemRoutes)
+app.use('/api/users', userRoutes)
 
 // Allows req.body to be used
 app.use(express.json())
@@ -31,4 +37,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(errorHandler)
+
 app.listen(port, () => console.log(`Server started on port ${port}`))

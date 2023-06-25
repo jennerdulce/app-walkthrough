@@ -4,7 +4,13 @@
   "description": "walkthrough on how to create and deploy a new app with minimal code",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "clientinstall": "npm install --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "render-postbuild": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": {
     "type": "git",
@@ -26,5 +32,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
