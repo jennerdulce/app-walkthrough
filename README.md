@@ -15,10 +15,11 @@
     - And pages where Item is used
 
 ## Backend
+- In the root directory, create a folder called `backend`
 - Will contain everything pertining to the application's backend
 
 ### Initialize the app
-- Creates a package.json for the application
+- Creates a `package.json` for the application
 - Enter `source ~/.bash_profile` in terminal so that `npm init` works
 - Enter `npm init` while in root of folder
     - Default everything
@@ -26,13 +27,13 @@
 
 ### Install Dependencies
 #### Dependencies
-- Third party software / libraries that help build out our application
+- Dependencies are third party software / libraries that help build out our application
 - Often written by other developers
 - These libraries offer solutions to common problems
 - Enter `npm i bcryptjs colors concurrently dotenv express express-async-handler jsonwebtoken mongodb mongoose`
 
 #### Dev Dependencies
-- Dependencies specifically for developers
+- Dev Dependencies specifically for developers
 - Are not necessary but act as useful tools during stages of development
 - Are not important to consumer
 - In root folder of application, enter command in terminal `npm i -D nodemon`
@@ -75,12 +76,12 @@ JWT_SECRET = jsonwebtokensecret
 - Create a folder called `middleware` within the `backend` folder
 
 ##### Auth Middleware
-- Create a file within `controllers` that will contain a set of controllers
+- Create a file within `middleware` that will contain a set of middleware
     - `authMiddleware.js`
 - See boilerplate code in `authMiddleware.js`
 
 ##### Error Middleware
-- Create a file within `controllers` that will contain a set of controllers
+- Create a file within `middleware` that will contain a set of controllers
     - `errorMiddleware.js`
 - See boilerplate code in `errorMiddleware.js`
 
@@ -126,6 +127,18 @@ MONGODB_URI = mongodb+srv://jennerdulce:jennerdulce@merntutorialcluster.fgesawn.
 - Be sure to add the database name in this area `merntutorialcluster.fgesawn.mongodb.net/--here--?`
 - Refer to `MongoDB Walkthrough` folder
 
+#### Create Models
+- Create the a folder called `models` within the `backend` folder
+
+##### Model for Item
+- Create a file within `models` that will contain a set of routes
+    - `itemModels.js`
+- See boilerplate code in `itemModel.js`
+
+##### Model for User
+- Create a file within `models` that will contain a set of routes
+    - `userModel.js`
+- See boilerplate code in `userModel.j
 ####  Creating a Database on Atlas
 - Step 1: Create a project
 - Step 2: Click Create Project
@@ -162,21 +175,8 @@ MONGODB_URI = mongodb+srv://jennerdulce:jennerdulce@merntutorialcluster.fgesawn.
 - Create a file called `db.js` within the `config` folder
 - See boilerplate code in `db.js`
 
-#### Create Models
-- Create the a folder called `models` within the `backend` folder
-
-##### Model for Item
-- Create a file within `models` that will contain a set of routes
-    - `itemModels.js`
-- See boilerplate code in `itemModel.js`
-
-##### Model for User
-- Create a file within `models` that will contain a set of routes
-    - `userModel.js`
-- See boilerplate code in `userModel.js`
-
 ## Frontend
-- Start by entering the command `npx create-react-app frontend --template redux` in your terminal
+- Begin in your root directory and start by entering the command `npx create-react-app frontend --template redux` in your terminal
 
 ### Create a Proxy
 - Head to the package-lock.json located in your `frontend` folder
@@ -190,7 +190,7 @@ MONGODB_URI = mongodb+srv://jennerdulce:jennerdulce@merntutorialcluster.fgesawn.
   "proxy": "http://localhost:3001",
 ```
 
-### Check to see if backend is connected
+### Check to see if the backend is connected
 - While in the terminal, change directories to `frontend`
 - While in the `frontend` directory, install the axios package with the command `npm i axios react-icons react-router-dom react-toastify`
 
@@ -230,6 +230,9 @@ export default App;
 - If the message from your backend is displayed, that means there is a successful connection
 
 ### Adding to Redux
+- `Services` are imported into `Slices`
+- `Actions from Slices` are imported into `Pages / Components`
+
 #### Create Features
 - Navigate to the `src` folder located in the `frontend` directory
 - Create a new folder and name it `features`
@@ -270,9 +273,15 @@ export default App;
 - Basic login, logout, and register functionality
 - Imports `itemService.js`
 - Refer to `itemSlice.js`
+- ** TO REPLACE **
+  - hold `ctrl` and press `D` on `iitemm` and change to proper item name
+  - hold `ctrl` and press `D` on `items` and change to proper item name
+  - hold `ctrl` and press `D` on `item` and change to proper item name
 
 ###### Item Service
 - Compartmentalizes API calls
+- ** TO REPLACE **
+  - Change `item` to correct item name
 - Refer to `itemService.js`
 
 ###### Add Item Reducer to Store
@@ -280,6 +289,45 @@ export default App;
 - Imports `itemSlice.js`
 - Head into `frontend -> src -> app -> store.js`
 - Refer to `Item` in `store.js`
+
+### Accessing State and Dispatching Actions
+- Reference this code:
+
+```js
+// useSelector: To use redux global state variables
+// useDispatch: To dispatch actions created in Redux
+import { useDispatch, useSelector } from 'react-redux'
+
+// Imported actions from reducers
+// getItems: Action that retrieves items from API and changes global state in Redux
+// reset: Resets global state in Redux
+import { getItems, reset } from '../features/items/itemSlice'
+
+function Dashboard() {
+  const dispatch = useDispatch()
+
+  // Using state from auth reducer in Redux
+  const { user } = useSelector((state) => state.auth) 
+
+  // Using state from item reducer in Redux
+  const { items, isLoading, isError, message } = useSelector((state) => state.item)
+
+  useEffect(() => {
+    // Dispatching 'getItems' action
+    dispatch(getItems())
+
+    return () => {
+      // Dispatching 'reset' action
+      dispatch(reset())
+    }
+  }, [user, isError, message, dispatch, navigate])
+  return (
+    <>
+
+    </>
+  )
+}
+```
 
 ### Pages
 - General Common Pages
@@ -303,3 +351,4 @@ export default App;
 
 ## Deploy to Render
 - Refer to `Render Images` folder
+- Build command should be `npm install && npm install --prefix frontend && npm run build --prefix frontend`

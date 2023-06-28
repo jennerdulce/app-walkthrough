@@ -1,19 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import itemService from './itemService'
+import iitemmService from './iitemmService'
 
 const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: '',
-    items: [],
+    items: [], // Change to lowercase
 }
 
 // Get User Items
-export const getItems = createAsyncThunk('item/getItems', async (user, thunkAPI) => {
+export const getItems = createAsyncThunk('iitemm/getItems', async (user, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
-        return await itemService.getItems(token)
+        return await iitemmService.getItems(token)
     } catch (error) {
         const message = ((error.response && error.response.data && error.response.data.message) || error.message || error.toString())
         return thunkAPI.rejectWithValue(message)
@@ -21,10 +21,10 @@ export const getItems = createAsyncThunk('item/getItems', async (user, thunkAPI)
 })
 
 // Create User Item
-export const createItem = createAsyncThunk('item/createItem', async (itemText, thunkAPI) => {
+export const createItem = createAsyncThunk('iitemm/createItem', async (iitemmText, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
-        return await itemService.createItem(itemText, token)
+        return await iitemmService.createItem(iitemmText, token)
     } catch (error) {
         const message = ((error.response && error.response.data && error.response.data.message) || error.message || error.toString())
         return thunkAPI.rejectWithValue(message)
@@ -32,18 +32,18 @@ export const createItem = createAsyncThunk('item/createItem', async (itemText, t
 })
 
 // Create Delete Item
-export const deleteItem = createAsyncThunk('item/deleteGoal', async (itemID, thunkAPI) => {
+export const deleteItem = createAsyncThunk('iitemm/deleteGoal', async (iitemmID, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
-        return await itemService.deleteItem(itemID, token)
+        return await iitemmService.deleteItem(iitemmID, token)
     } catch (error) {
         const message = ((error.response && error.response.data && error.response.data.message) || error.message || error.toString())
         return thunkAPI.rejectWithValue(message)
     }
 })
 
-export const itemSlice = createSlice({
-    name: 'item',
+export const iitemmSlice = createSlice({
+    name: 'iitemm',
     initialState,
     reducers: {
         reset: (state) => initialState,
@@ -56,10 +56,10 @@ export const itemSlice = createSlice({
             .addCase(getItems.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.items = action.payload
+                state.items = action.payload // Change to lowercase
             })
             .addCase(getItems.rejected, (state, action) => {
-                state.items = []
+                state.items = [] // Change to lowercase
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
@@ -70,7 +70,7 @@ export const itemSlice = createSlice({
             .addCase(createItem.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.items.push(action.payload)
+                state.items.push(action.payload) /// Change to lowercase
             })
             .addCase(createItem.rejected, (state, action) => {
                 state.isLoading = false
@@ -83,7 +83,7 @@ export const itemSlice = createSlice({
             .addCase(deleteItem.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.items = state.items.filter((item) => item._id !== action.payload.id)
+                state.items = state.items.filter((iitemm) => iitemm._id !== action.payload.id) // Change to lowercase
             })
             .addCase(deleteItem.rejected, (state, action) => {
                 state.isLoading = false
@@ -93,5 +93,5 @@ export const itemSlice = createSlice({
     },
 })
 
-export const { reset } = itemSlice.actions
-export default itemSlice.reducer
+export const { reset } = iitemmSlice.actions
+export default iitemmSlice.reducer

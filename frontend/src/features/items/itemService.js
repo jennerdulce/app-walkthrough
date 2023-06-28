@@ -16,13 +16,13 @@ const getItems = async (token) => {
 }
 
 // Create Item
-const createItem = async (itemData, token) => {
+const createItem = async (iitemmData, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         }
     }
-    const response = await axios.post(API_URL, itemData, config)
+    const response = await axios.post(API_URL, iitemmData, config)
 
     if (response.data) {
         return response.data
@@ -30,23 +30,23 @@ const createItem = async (itemData, token) => {
 }
 
 // Delete Item
-const deleteItem = async (ItemID, token) => {
+const deleteItem = async (iitemmID, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         }
     }
-    const response = await axios.delete(API_URL + ItemID, config)
+    const response = await axios.delete(API_URL + iitemmID, config)
 
     if (response.data) {
         return response.data
     }
 }
 
-const itemService = {
+const iitemmService = {
     getItems,
     createItem,
     deleteItem
 }
 
-export default itemService
+export default iitemmService
