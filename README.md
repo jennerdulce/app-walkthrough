@@ -352,3 +352,65 @@ function Dashboard() {
 ## Deploy to Render
 - Refer to `Render Images` folder
 - Build command should be `npm install && npm install --prefix frontend && npm run build --prefix frontend`
+
+## Dependency Notes
+
+### React
+
+- useEffect:
+  - 
+
+- useState:
+  - 
+
+### React Redux
+- useDispatch:
+  - 
+  
+- useSelector:
+  - 
+
+### React Router DOM
+- Navlink: 
+  - Used to create a link similar to an `<a>` tag, that will redirect users to the route when clicked
+  - Typically used on headers or any other clickable item to redirect users
+
+```js
+<NavLink to="/" className='nav-link-text'>
+    Home
+</NavLink>
+<NavLink to="/otherpage" className='nav-link-text'>
+    Home
+</NavLink>
+```
+
+- Link: 
+  - Used to create a link similar to an `<a>` tag, that will redirect users to the route when clicked
+  - Typically used on headers or any other clickable item to redirect users
+  - Very similar to NavLink
+
+```js
+<li>
+      <Link to='/login'>
+          <FaSignInAlt /> Login
+      </Link>
+  </li>
+  <li>
+      <Link to='/register'>
+          <FaUser /> Register
+      </Link>
+  </li>
+```
+
+- useNavigate:
+  - Instantly redirects users to the route
+  - Used when you want to redirect a user without clicking a button
+  - Typically triggered with boolean variables
+
+```js
+const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/login')
+}
+```
